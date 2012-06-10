@@ -1052,6 +1052,8 @@ def create_environment(home_dir, site_packages=False, clear=False,
 
     install_activate(home_dir, bin_dir, prompt)
 
+    install_env(home_dir)
+
 def path_locations(home_dir):
     """Return the path locations for the environment (where libraries are,
     where scripts go, etc)"""
@@ -1478,6 +1480,12 @@ def install_activate(home_dir, bin_dir, prompt=None):
         content = content.replace('__VIRTUAL_NAME__', vname)
         content = content.replace('__BIN_NAME__', os.path.basename(bin_dir))
         writefile(os.path.join(bin_dir, name), content)
+
+def install_env(home_dir):
+    content = ENV_FILE
+    content = content.replace('__VIRTUAL_ENV__', home_dir)
+    name = ".env"
+    writefile(os.path.join(home_dir, "..", name), content)
 
 def install_distutils(home_dir):
     distutils_path = change_prefix(distutils.__path__[0], home_dir)
@@ -2111,6 +2119,10 @@ ZByMW1calGtMDMXFPMIH6Hv1Nya391MTe/XwuDoZMVNHJYjMnf5e8yP3gBSBszG8H1FXF157pH5E
 G65rwry2Un7VrUwyKlInSA/UHGHEx0GGxcfRBBM84ThrNswu9pUIWbFqiiuUgifl9no0SpLk8oNK
 nE67S5xgo0i4MiEhHRHlZdR+mZdGipUE9pN9taw3OPCSlZf+eVMngxpa7KHipzF8VDeJz0iU79ax
 vk1xEnMYBvmBrrj+KWvhE1bCf66Df18F5RrAKv0FHXOiDA==
+""")
+
+ENV_FILE = convert("""
+eJxTVtRPyszTT0oszuAqzi8tSk5ViI8P8wwKCXX0iXf1C4uPB8snJpdkliWWpAIAb0oQCA==
 """)
 
 ##file activate.fish
