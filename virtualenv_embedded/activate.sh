@@ -40,6 +40,8 @@ deactivate () {
 deactivate nondestructive
 
 VIRTUAL_ENV="__VIRTUAL_ENV__"
+VIRTUAL_ENV_DIRNAME=`dirname $VIRTUAL_ENV`
+PROJECT_NAME=`basename $VIRTUAL_ENV_DIRNAME`
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -64,7 +66,7 @@ if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ] ; then
         # see http://www.zetadev.com/software/aspen/
         PS1="[`basename \`dirname \"$VIRTUAL_ENV\"\``] $PS1"
     else
-        PS1="(`basename \"$VIRTUAL_ENV\"`)$PS1"
+        PS1="($PROJECT_NAME)$PS1"
     fi
     fi
     export PS1
